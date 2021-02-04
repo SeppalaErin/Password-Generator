@@ -3,12 +3,16 @@ var generateBtn = document.querySelector("#generate");
 
 var upperChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ];
 var lowerChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var numberChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var specialChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "="];
 
 var minLength;
 var maxLength;
 
+var confirmUpperChar;
+var confirmLowerChar;
+var confirmNumber;
+var confirmSpecialChar;
 
 // Write password to the #password input
 function writePassword() {
@@ -37,30 +41,51 @@ function generatePassword(){
     while ((!(maxLength >= minLength)) || (!(maxLength <= 128))){
       maxLength = parseInt(prompt("Invalid input. Please enter a length between " + minLength + " and 128."));
     }
-  
+
+    confirmUpperChar = confirm("Do you want uppercase characters?");
+    confirmLowerChar = confirm("Do you want lowercase characters?");
+    confirmNumber = confirm("Do you want numbers?");
+    confirmSpecialChar = confirm("Do you want special characters?");
+
+
+    if (confirmUpperChar != true && confirmLowerChar != true && confirmNumber != true && confirmSpecialChar != true){
+      alert("You must select at least one character type!");
+
+
+    }
+
+
     var fixLength = maxLength - minLength + 1;
   
     var passLength = Math.floor((Math.random()*fixLength)+minLength);
     
-    for(var i=0; i<lowerChar.length; i++){
-      passChar.push(lowerChar[i]);
-    }
-
+  if (confirmUpperChar = true){
     for(var j=0; j<upperChar.length; j++){
       passChar.push(upperChar[j]);
     }
-
-    for(var k=0; k<numberChar.length; k++){
-      passChar.push(numberChar[k]);
+  }
+  
+  if (confirmLowerChar = true){
+    for(var i=0; i<lowerChar.length; i++){
+      passChar.push(lowerChar[i]);
     }
+  }
 
+  if (confirmNumber = true){  
+    for(var k=0; k<number.length; k++){
+      passChar.push(number[k]);
+    }
+  }
+
+  if (confirmSpecialChar = true){
     for(var l=0; l<specialChar.length; l++){
       passChar.push(specialChar[l]);
     }
+  }
 
     tempPass.push(lowerChar[Math.floor(Math.random()*lowerChar.length)])
     tempPass.push(upperChar[Math.floor(Math.random()*upperChar.length)])
-    tempPass.push(numberChar[Math.floor(Math.random()*numberChar.length)])
+    tempPass.push(number[Math.floor(Math.random()*number.length)])
     tempPass.push(specialChar[Math.floor(Math.random()*specialChar.length)])
 
     for(var m=tempPass.length; m<passLength; m++){
